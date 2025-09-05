@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Personal</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Animación para la aparición de los elementos */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px); /* Desplazamiento suave hacia arriba */
+            transition: opacity 1.5s ease, transform 1.5s ease; /* Transición más suave */
+        }
+
+        /* Cuando los elementos se cargan */
+        body.loaded .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #444;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .header img {
+            height: 40px; /* Ajustado tamaño del logo */
+            width: 40px;  /* Ajustado tamaño del logo */
+            border-radius: 10px;
+            border: 2px solid #000000;
+            margin-right: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de transición en el logo */
+        }
+        .header img:hover {
+            transform: scale(1.2); /* Efecto de zoom más grande al pasar sobre el logo */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .header h1 {
+            font-size: 1.6em; /* Tamaño de fuente ajustado */
+            margin: 0;
+            font-family: 'Arial', sans-serif; /* Fuente Arial */
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: capitalize; /* Primeras letras en mayúsculas */
+            transition: color 0.3s ease, transform 0.3s ease, letter-spacing 0.3s ease; /* Transición suave */
+        }
+        .header:hover h1 {
+            transform: translateY(-5px); /* Desplazamiento suave hacia arriba */
+            letter-spacing: 2px; /* Aumento del espaciado de letras */
+        }
+        .header:hover {
+            background-color: #333333; /* Cambio de fondo del encabezado */
+            transform: translateY(-5px); /* Desplazamiento hacia arriba del encabezado */
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            text-align: center;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+        }
+        .profile-image {
+            width: 200px;
+            height: 300px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+        }
+        h1 {
+            color: #f4f4f4;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        p {
+            line-height: 1.8;
+            color: #b0b0b0;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 40px; /* Ajustado el tamaño del icono */
+            height: 40px; /* Ajustado el tamaño del icono */
+            text-decoration: none;
+            color: #ffffff;
+            border-radius: 50%; /* Mantener el borde redondeado */
+            background-color: #ffffff; /* Fondo blanco */
+            border: 2px solid #ffffff; /* Borde blanco */
+            background-size: cover;
+            box-shadow: none; /* Sin sombra */
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .social-links a:nth-child(1) {
+            background-image: url('https://i.ibb.co/RHhT8Wv/171.png'); /* Reemplazar con el logo de Facebook */
+            border-color: #1424b1; /* Color de borde para Facebook */
+        }
+        .social-links a:nth-child(2) {
+            background-image: url('https://i.ibb.co/XYPLSrS/18.png'); /* Reemplazar con el logo de Instagram */
+            border-color: #d6249f; /* Color de borde para Instagram */
+        }
+        .social-links a:nth-child(3) {
+            background-image: url('https://i.ibb.co/X3Ggb7j/19.jpg'); /* Reemplazar con el logo de WhatsApp */
+            border-color: #25d366; /* Color de borde para WhatsApp */
+        }
+        .social-links a:nth-child(4) {
+            background-image: url('https://i.ibb.co/VJ7Bh3m/gmail-icon-free-png.webp'); /* Reemplazar con el logo de Gmail */
+            border-color: #ffffff; /* Borde blanco para Gmail */
+        }
+        .social-links a:hover {
+            transform: scale(1.1);
+            background-color: #f4f4f4; /* Fondo más claro al pasar el mouse */
+        }
+        .additional-info {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #292929;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .additional-info:hover {
+            background-color: #343434;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+        }
+        .additional-info img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .additional-info img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+        }
+        .additional-info p {
+            font-size: 1.1em;
+            color: #c0c0c0;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .profile-image {
+                width: 150px;
+                height: 225px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .additional-info img {
+                max-width: 100%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header fade-in">
+        <img src="https://i.ibb.co/yN93Dk7/Dise-o-sin-t-tulo-6.jpg" alt="Logo">
+        <h1>Unidad Internacional del Saber y Asociados®</h1>
+    </div>
+    <div class="container fade-in">
+        <img src="https://i.ibb.co/sdf5WDMk/Ibarra-Sof-a.jpg" alt="Foto de perfil" class="profile-image">
+        <h1>Ibarra Sofía</h1>
+        <p>
+           Ibarra Sofía.
+            Especialista en Psicología Holística
+             Marcos Paz, Buenos Aires. Argentina </p>
+            <p>Número de Matricula/Membresía: 31055988414-5</p>
+            <p>Intitución formadora: Asociación de Formación Holística Andina®</p>
+       
+
+
+        <div class="social-links">
+            <a href="https://www.facebook.com/andinaformaciones/" title="Facebook"></a>
+            <a href="https://www.instagram.com/almadelosastros/" title="Instagram"></a>
+            <a href="https://wa.me/5491131527742" title="WhatsApp"></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Mail/Almadelosastros@gmail.com.com&su=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20información%20sobre%20Psicología%20Integral%20Holística." title="Gmail"></a>
+        </div>
+        <div class="additional-info fade-in">
+            <img src="https://i.ibb.co/2K39Hsv/Dise-o-sin-t-tulo-3.jpg/800x600" alt="Imagen adicional">
+            <P>ESPECIALISTA EN PSICOLOGÍA HOLÍSTICA</P>
+            <p>Mi Nombre:  Ibarra Sofía</p>
+            <p>
+               Me presento, tengo 30 años de edad. Con una trayectoria de más de 16 años en el estudio de la astrología, he desarrollado una profunda pasión por esta disciplina que me ha permitido comprender mejor el universo y mi lugar en él. Inicialmente, mi acercamiento fue autodidacta, lo que me permitió explorar y descubrir los fundamentos de la astrología de manera independiente. Posteriormente, me formé en diversas academias e institutos especializados, lo que me brindó la oportunidad de profundizar en mis conocimientos y habilidades.
+
+Como terapeuta holística y tarotista, he encontrado en estas prácticas una forma de canalizar mi sensibilidad y explorar mi conexión con el universo. Mi experiencia en la lectura del tarot y la interpretación de oráculos me ha permitido desarrollar una mayor comprensión de la naturaleza humana y ofrecer herramientas valiosas para el crecimiento personal y la toma de decisiones.
+
+Además de mi trabajo en el ámbito holístico, también tengo una sólida formación en pedagogía. Como Profesora Nacional en Lengua y Literatura, he tenido la oportunidad de perfeccionarme y formarme en distintas universidades de la república Argentinas. Esta experiencia me ha permitido desarrollar habilidades efectivas para la enseñanza y la comunicación, lo que me ha sido muy útil en mi trabajo con estudiantes y clientes.
+
+Actualmente, combino mis dos pasiones -la holística y la enseñanza- en mi sitio de trabajo, @almadelosastros. En este espacio, busco compartir mi conocimiento y experiencia con otros, ofreciendo una perspectiva integral y holística que abarca la astrología, el tarot y la espiritualidad. Mi objetivo es brindar herramientas y recursos valiosos para que las personas puedan crecer y desarrollarse de manera integral.
+
+Me considero afortunada de poder fusionar mi amor por la astrología, el tarot y la enseñanza, y estoy comprometida con seguir aprendiendo y creciendo en estas áreas. Estoy emocionada de poder compartir mi pasión con otros y contribuir a su crecimiento y bienestar.</p>
+      
+      <p>logo de la empresa de Sofía Ibarra "Alma de los Astros"</p>
+       
+       <img src="https://i.ibb.co/SDSHRFTv/Astros.jpg/400x250" alt="Imagen adicional">
+            
+        <P>En sus redes sociales cuenta con más de 9.000 Seguidores, con una gran participación Activa Compartiendo contenido de un alto nivel educativo para el abordaje de terapias Holísticas.  </P>
+       
+        
+
+
+
+
+
+
+
+
+            
+        
+        
+           <!DOCTYPE html>
+            <html lang="es">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Imagen a través de un enlace con animación</title>
+            <style>
+            /* Estilos para la animación al pasar el mouse */
+            a.image-container {
+              display: inline-block;
+              overflow: hidden;
+              position: relative;
+              perspective: 1000px; /* Para aplicar efectos 3D */
+            }
+            
+            a.image-container img {
+              display: block;
+              overflow: hidden;
+              border-radius: 10px;
+              transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+            }
+            
+            a.image-container:hover img {
+              transform: scale(1.05) rotateY(5deg) rotateX(5deg);
+              box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+              filter: blur(3px); /* Efecto de desenfoque */
+            }
+            
+            /* Estilos para el texto de indicación */
+            a.image-container .indication {
+              position: absolute;
+              bottom: 30px;
+              left: 50%;
+              transform: translateX(-50%);
+              background-color: rgba(255, 255, 255, 0.8);
+              padding: 5px 10px;
+              border-radius: 5px;
+              font-size: 14px;
+              color: #333;
+              opacity: 0;
+              transition: opacity 0.3s ease;
+            }
+            
+            a.image-container:hover .indication {
+              opacity: 1;
+            }
+            
+            /* Estilos para la flecha */
+            .arrow {
+              position: absolute;
+              bottom: 10px;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+            </style>
+            </head>
+            <body>
+            
+            <!-- Enlace a la imagen con animación -->
+            <a href="https://andinaformaciones.github.io/instituto/?fbclid=IwAR3mAXtvX4R9Ti8i7RENkaaVdedY8C3krtJExIbu0ggzJtahgCgk0NEB8nY_aem_Acu2HfMkGVtjJQSShZP78VUitenOJD-V3S92TpkDU_6Y3z4rMX_j4lbQWViIMuCY3zeVVxeCY0cJgmjTDIzfF5gc" class="image-container">
+                <!-- Imagen -->
+                <img src="https://i.ibb.co/F5xzLfT/Andina-Formaciones.png" alt="Descripción de la imagen" width="300">
+                <!-- Flecha indicativa -->
+             
+                <!-- Indicación -->
+                <span class="indication">Haz clic en la imagen para visitar la web</span>
+            </a>
+            
+            </body>
+            </html>
+            
+            
+            <p>(Haz clic en la imagen para visitar la web)</p>
+            
+            <p>INSTITUCIÓN ACADEMICA Encargada de la Formacion de Ibarra Sofía</p> 
+            
+
+            <p>Asociación de Formación Holística Andina®</p>
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            document.body.classList.add('loaded');
+        };
+    </script>
+</body>
+</html>
+
